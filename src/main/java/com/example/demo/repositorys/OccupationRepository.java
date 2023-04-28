@@ -7,5 +7,5 @@ import com.example.demo.entity.Occupation;
 
 @Repository
 public interface OccupationRepository extends JpaRepository<Occupation, Integer> {
-
+	Occupation findByidoccupation(String id);
 }

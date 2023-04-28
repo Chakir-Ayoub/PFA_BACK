@@ -60,7 +60,7 @@ public class VilleServiceImpl implements VilleService {
 	public void Delete(String id) {
 		// TODO Auto-generated method stub
 		Ville ville=repository.findByvilleid(id);
-		if(ville==null) throw new RuntimeException("Ville Not exist");
+		if(ville==null) throw new RuntimeException("Ville Not exists");
 		repository.delete(ville);
 	}
 

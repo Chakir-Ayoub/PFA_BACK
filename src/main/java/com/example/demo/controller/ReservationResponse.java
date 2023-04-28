@@ -8,6 +8,7 @@ import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
 public class ReservationResponse {
+	private Integer id;
 	private String idreservation;
 	private Date date;
 	private Boolean etat=false;
@@ -36,6 +37,12 @@ public class ReservationResponse {
 	}
 	public void setClientid(UserEntity clientid) {
 		this.clientid = clientid;
+	}
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
 	}
 	
 	

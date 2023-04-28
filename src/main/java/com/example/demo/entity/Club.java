@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -24,11 +25,11 @@ public class Club {
 	private String nom;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "club",fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "club",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 	private List<Terrain> terrains;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "club",fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "club",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 	private List<Packe> packages;
 
 	public Integer getId() {

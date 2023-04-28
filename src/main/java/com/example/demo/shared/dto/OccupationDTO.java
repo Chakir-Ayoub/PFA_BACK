@@ -4,12 +4,14 @@ import java.util.Date;
 
 import com.example.demo.entity.Reservation;
 import com.example.demo.entity.Terrain;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
 public class OccupationDTO {
 	private String idoccupation;
+	@JsonFormat(pattern="yyyy-MM-dd")
 	@Temporal(TemporalType.DATE)
 	private Date date;
 	@Temporal(TemporalType.TIME)

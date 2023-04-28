@@ -35,4 +35,5 @@ public class ReservationRequest {
 		this.clientid = clientid;
 	}
 
+
 }

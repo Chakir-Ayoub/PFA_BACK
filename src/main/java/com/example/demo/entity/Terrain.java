@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -43,13 +44,13 @@ public class Terrain {
 	private Zone zone;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "terrain",fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "terrain",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	private List<Photo> photo;
 	
 	
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "terrain")
+	@OneToMany(mappedBy = "terrain",cascade = CascadeType.ALL)
 	private List<Occupation> occupations;
 	
 	@JoinColumn(name = "id_club",nullable = false)

@@ -9,19 +9,12 @@ import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
 public class OccupationRequest {
-	private String idoccupation;
 	@Temporal(TemporalType.DATE)
 	private Date date;
 	@Temporal(TemporalType.TIME)
 	private Date heure;
 	private Terrain terrain;
 	private Reservation reservation;
-	public String getIdoccupation() {
-		return idoccupation;
-	}
-	public void setIdoccupation(String idoccupation) {
-		this.idoccupation = idoccupation;
-	}
 	public Date getDate() {
 		return date;
 	}

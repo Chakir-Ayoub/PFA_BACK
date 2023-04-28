@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -33,7 +34,7 @@ public class Packe {
 	private Club club;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "packe")
+	@OneToMany(mappedBy = "packe",cascade = CascadeType.ALL)
 	private List<Abonnement> abonnements;
 
 	public Integer getId() {

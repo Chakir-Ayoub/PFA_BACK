@@ -46,7 +46,7 @@ public class OccupationResponse {
 	public void setReservation(Reservation reservation) {
 		this.reservation = reservation;
 	}
-	
+
 	
 	
 }

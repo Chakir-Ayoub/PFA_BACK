@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
@@ -21,7 +22,8 @@ public class Reservation {
 	@Column(nullable = false)
 	private Boolean etat=false;
 	
-	@OneToMany(mappedBy = "reservation")
+	@JsonIgnore
+	@OneToMany(mappedBy = "reservation",cascade = CascadeType.ALL)
 	private List<Occupation> occupations;
 	
 	@JsonIgnore

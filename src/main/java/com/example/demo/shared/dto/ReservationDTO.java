@@ -5,7 +5,7 @@ import java.util.Date;
 import com.example.demo.entity.UserEntity;
 
 public class ReservationDTO {
-	
+	private Integer id;
 	private String idreservation;
 	private Date date;
 	private Boolean etat=false;
@@ -34,5 +34,11 @@ public class ReservationDTO {
 	}
 	public void setClientid(UserEntity clientid) {
 		this.clientid = clientid;
+	}
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
 	}
 }

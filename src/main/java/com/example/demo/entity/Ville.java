@@ -22,7 +22,7 @@ public class Ville  {
 	private Integer codePostale;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "ville",fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "ville",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 	private List<Zone> zone;
 
 	public Integer getId() {
