@@ -2,9 +2,11 @@ package com.example.demo.services;
 
 import java.util.List;
 
+import org.springframework.security.core.userdetails.UserDetailsService;
+
 import com.example.demo.shared.dto.ProprietaireDto;
 
-public interface ProprietaireService {
+public interface ProprietaireService extends UserDetailsService {
 	
 	ProprietaireDto createProprietaire(ProprietaireDto proprietaireDto);
 	ProprietaireDto GetProprietaireById(String id);

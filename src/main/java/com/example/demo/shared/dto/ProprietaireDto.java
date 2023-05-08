@@ -11,8 +11,15 @@ public class ProprietaireDto {
 	private String lastName;
 	private String email;
 	private String encryptedPassword;
+	private String password;
 	private Boolean admin;
 	private List<TerrainDTO> terrains;
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 	public Long getId() {
 		return Id;
 	}

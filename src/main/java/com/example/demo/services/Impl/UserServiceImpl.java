@@ -7,12 +7,10 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.entity.Abonnement;
 import com.example.demo.entity.UserEntity;
 import com.example.demo.repositorys.UserRepository;
 import com.example.demo.services.UserService;
 import com.example.demo.shared.Utils;
-import com.example.demo.shared.dto.AbonnementDTO;
 import com.example.demo.shared.dto.UserDto;
 
 

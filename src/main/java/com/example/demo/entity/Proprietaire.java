@@ -19,12 +19,12 @@ public class Proprietaire {
 	private String lastName;
 	@Column(nullable = false,length = 50)
 	private String email;
-	@Column(nullable = false,length = 50)
+	@Column(nullable = false)
 	private String encryptedPassword;
 	@Column(nullable = false)
 	private Boolean admin;
 	
-	@OneToMany(mappedBy = "proprietaire",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "proprietaire",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Terrain> terrains;
 
 	public Long getId() {

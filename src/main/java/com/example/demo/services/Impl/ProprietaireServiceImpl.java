@@ -5,6 +5,10 @@ import java.util.List;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Proprietaire;
@@ -21,12 +25,13 @@ public class ProprietaireServiceImpl implements ProprietaireService {
 	ProprietaireRepository proprietaireRepository;
 	@Autowired
 	Utils utils;
+	@Autowired
+	BCryptPasswordEncoder bCryptPasswordEncoder;
 	@Override
 	public ProprietaireDto createProprietaire(ProprietaireDto proprietaireDto) {
 		// TODO Auto-generated method stub
 		Proprietaire proprietaireCheck=proprietaireRepository.findByemail(proprietaireDto.getEmail());
 		if(proprietaireCheck!=null) throw new RuntimeException("Proprietaire Already Exists");
-		
 		for(int i=0;i<proprietaireDto.getTerrains().size();i++) {
 			TerrainDTO terrain=proprietaireDto.getTerrains().get(i);
 			terrain.setProprietaire(proprietaireDto);
@@ -38,7 +43,7 @@ public class ProprietaireServiceImpl implements ProprietaireService {
 		Proprietaire proprietaire=modelMapper.map(proprietaireDto, Proprietaire.class);
 		
 		proprietaire.setProprietaireid(utils.generateStringId(30));
-		proprietaire.setEncryptedPassword("ABCDEF");
+		proprietaire.setEncryptedPassword(bCryptPasswordEncoder.encode(proprietaireDto.getPassword()));
 		
 		Proprietaire newProprietaire = proprietaireRepository.save(proprietaire);
 		
@@ -61,7 +66,7 @@ public class ProprietaireServiceImpl implements ProprietaireService {
 	}
 
 	@Override
-	public ProprietaireDto Update(String id, ProprietaireDto proprietaireDto) {
+	public ProprietaireDto Update(String id, ProprietaireDto proprietaireDto)  {
 		// TODO Auto-generated method stub
 		Proprietaire proprietaire=proprietaireRepository.findByproprietaireid(id);
 		if(proprietaire==null) throw new RuntimeException("Proprietaire Not Exists");
@@ -112,6 +117,17 @@ public class ProprietaireServiceImpl implements ProprietaireService {
 		ProprietaireDto proprietaireDto=modelMapper.map(proprietaire, ProprietaireDto.class);
 		
 		return proprietaireDto;
+	}
+
+	@Override
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException{
+		// TODO Auto-generated method stub
+		Proprietaire proprietaire=proprietaireRepository.findByemail(email);
+		
+		if(proprietaire==null) throw new RuntimeException(email);
+		
+		return new User(proprietaire.getEmail(), proprietaire.getEncryptedPassword(), new ArrayList<>());
+		
 	}
 
 }

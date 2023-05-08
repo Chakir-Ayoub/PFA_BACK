@@ -14,6 +14,8 @@ public class ProprietaireRequest {
 	private String password;
 	private Boolean admin;
 	private List<TerrainRequest> terrains;
+	
+	
 	public String getFirstName() {
 		return firstName;
 	}
