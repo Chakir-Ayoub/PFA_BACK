@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import java.lang.reflect.Type;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +24,10 @@ import com.example.demo.request.TerrainRequest;
 import com.example.demo.services.TerrainService;
 import com.example.demo.shared.dto.TerrainDTO;
 
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
+
+
 @RestController
 @RequestMapping("/terrain")
 @CrossOrigin("http://localhost:4200/")
@@ -30,18 +36,21 @@ public class TerrainController {
 	TerrainService terrainService;
 	
 	@GetMapping
-	public ResponseEntity<List<TerrainResponse>> GetAll()
+	public ResponseEntity<List<TerrainResponse>> GetAll(Principal principal)
 	{
-		List<TerrainResponse> list=new ArrayList<>();
-		List<TerrainDTO> list2=terrainService.GetAll();
+		List<TerrainDTO> list2=terrainService.GetAll(principal.getName());
 		
-		for (TerrainDTO terrainDTO : list2) {
+		
+		Type TerrainResponse= new TypeToken<List<TerrainResponse>>() {}.getType();
+		List<TerrainResponse> terrainResponses=new ModelMapper().map(list2, TerrainResponse);
+
+	/*	for (TerrainDTO terrainDTO : list2) {
 			TerrainResponse response=new TerrainResponse();
 			BeanUtils.copyProperties(terrainDTO, response);
 			
 			list.add(response);
-		}
-		return new ResponseEntity<List<TerrainResponse>>(list,HttpStatus.ACCEPTED);
+		}*/
+		return new ResponseEntity<List<TerrainResponse>>(terrainResponses,HttpStatus.ACCEPTED);
 	}
 	
 	@PostMapping

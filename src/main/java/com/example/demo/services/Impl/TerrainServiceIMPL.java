@@ -7,16 +7,25 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.entity.Proprietaire;
 import com.example.demo.entity.Terrain;
+import com.example.demo.repositorys.ProprietaireRepository;
 import com.example.demo.repositorys.TerrainRepository;
 import com.example.demo.services.TerrainService;
 import com.example.demo.shared.Utils;
 import com.example.demo.shared.dto.TerrainDTO;
+import java.lang.reflect.Type;
+
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
+
 
 @Service
 public class TerrainServiceIMPL implements TerrainService {
 	@Autowired
 	TerrainRepository repository;
+	@Autowired
+	ProprietaireRepository proprietaireRepository;
 	@Autowired
 	Utils utils;
 	@Override
@@ -39,18 +48,24 @@ public class TerrainServiceIMPL implements TerrainService {
 	}
 
 	@Override
-	public List<TerrainDTO> GetAll() {
+	public List<TerrainDTO> GetAll(String email) {
 		// TODO Auto-generated method stub
-		List<TerrainDTO> dtos=new ArrayList<>();
-		List<Terrain> terrains=repository.findAll();
+		Proprietaire currentProprietaire=proprietaireRepository.findByemail(email);
+
+	
+		List<Terrain> terrains=currentProprietaire.getAdmin()==true? (List<Terrain>) repository.findAll() : (List<Terrain>) repository.findByproprietaire(currentProprietaire);
 		
+		Type listeType=new TypeToken<List<TerrainDTO>>() {}.getType();
+		
+		List<TerrainDTO> terrainDTOs=new ModelMapper().map(terrains, listeType);
+		/*List<TerrainDTO> dtos=new ArrayList<>();
 		for (Terrain terrain : terrains) {
 			TerrainDTO dto=new TerrainDTO();
 			BeanUtils.copyProperties(terrain, dto);
 			
 			dtos.add(dto);
-		}
-		return dtos;
+		}*/
+		return terrainDTOs;
 	}
 
 	@Override
