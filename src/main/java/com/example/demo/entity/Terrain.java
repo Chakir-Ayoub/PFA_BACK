@@ -56,6 +56,20 @@ public class Terrain {
 	@JoinColumn(name = "id_club",nullable = false)
 	@ManyToOne
 	private Club club;
+	
+	@ManyToOne
+	@JoinColumn(name = "proprietaire_id")
+	private Proprietaire proprietaire; 
+	
+
+
+	public Proprietaire getProprietaire() {
+		return proprietaire;
+	}
+
+	public void setProprietaire(Proprietaire proprietaire) {
+		this.proprietaire = proprietaire;
+	}
 
 	public Integer getId() {
 		return id;

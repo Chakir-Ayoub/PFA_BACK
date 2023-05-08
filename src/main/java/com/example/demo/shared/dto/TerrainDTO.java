@@ -16,6 +16,7 @@ public class TerrainDTO {
 	private Float tarif;
 	private Zone zone;
 	private Club club;
+	private ProprietaireDto proprietaire;
 	
 	public Integer getId() {
 		return id;
@@ -88,5 +89,11 @@ public class TerrainDTO {
 	}
 	public void setClub(Club club) {
 		this.club = club;
+	}
+	public ProprietaireDto getProprietaire() {
+		return proprietaire;
+	}
+	public void setProprietaire(ProprietaireDto proprietaire) {
+		this.proprietaire = proprietaire;
 	}
 }
